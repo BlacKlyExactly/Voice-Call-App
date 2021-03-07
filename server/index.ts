@@ -1,11 +1,10 @@
 import { Server as SocketServer, Socket } from "socket.io";
 import { createServer, Server as HttpServer, ServerOptions } from "http";
 import express, { Express } from "express";
-import { PeerServer } from "peer";
+import { ExpressPeerServer } from "peer";
 import path from "path";
 
 const httpPort: number | string = process.env.PORT || 8080;
-const peerPort: number | string = process.env.PORT || "8081";
 
 const app: Express = express();
 const httpServer: HttpServer = createServer(app);
@@ -15,8 +14,6 @@ const io = new SocketServer(httpServer, {
     origin: "*",
   },
 });
-
-const peerServer = PeerServer({ port: parseInt(peerPort), path: "/rtc" });
 
 interface Connection {
     room: string,
@@ -47,6 +44,8 @@ let connections: Connection[] = [
 let messages: MsgList[] = [
     { roomId: "GLOBAL", messages: [] }
 ];
+
+app.use("/rtc", ExpressPeerServer(httpServer))
 
 app.get("/", ( req, res ) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));
