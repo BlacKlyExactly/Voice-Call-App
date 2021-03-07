@@ -4,7 +4,7 @@ const customGenerationFunction = () => (Math.random().toString(36) + '0000000000
 
 const peer = new Peer(customGenerationFunction(), {
     host: "localhost",
-    port: 8081,
+    port: 8080,
     path: "/rtc",
     debug: 1,
 });
