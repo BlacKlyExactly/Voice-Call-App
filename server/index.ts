@@ -4,8 +4,8 @@ import express, { Express } from "express";
 import { PeerServer } from "peer";
 import fs from "fs";
 
-const httpPort: number = 8080;
-const peerPort: number = 8081;
+const httpPort: number | string = 8080 || process.env.PORT;
+const peerPort: number | string = 8081 || process.env.PORT;
 
 const app: Express = express();
 const httpServer: HttpServer = createServer(app);
