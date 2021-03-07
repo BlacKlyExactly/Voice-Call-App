@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "startDev": "concurrently \"cd server && nodemon index.ts\" \"cd client && npm run start\"",
-    "start":  "concurrently \"cd server && npm run start\" \"cd client && npm run start\"",
+    "start":  "concurrently \"cd server && npm run start\" \"cd client && npm run build\"",
     "install": "concurrently \"cd server && npm install\" \"cd client && npm install\"",
     "build": "cd client && react-scripts build",
     "test": "cd client && react-scripts test",
