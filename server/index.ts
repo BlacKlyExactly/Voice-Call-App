@@ -50,8 +50,7 @@ const peerServer = ExpressPeerServer(httpServer);
 app.use("/rtc", ExpressPeerServer(httpServer))
 
 app.get("/", ( req, res ) => {
-    res.sendFile(path.join(__dirname, "public", "index.html"));
-    console.log(path.join(__dirname, "public", "index.html"));
+    res.sendFile(path.join("./", "client", "public", "index.html"));
 });
 
 app.get("/api/rooms", ( req, res ) => res.send({ connections }));
