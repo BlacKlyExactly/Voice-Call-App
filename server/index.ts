@@ -50,6 +50,7 @@ let messages: MsgList[] = [
 
 app.get("/", ( req, res ) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));
+    console.log(path.join(__dirname, "public", "index.html"));
 });
 
 app.get("/api/rooms", ( req, res ) => res.send({ connections }));
