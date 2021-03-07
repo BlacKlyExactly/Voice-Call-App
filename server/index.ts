@@ -45,6 +45,8 @@ let messages: MsgList[] = [
     { roomId: "GLOBAL", messages: [] }
 ];
 
+const peerServer = ExpressPeerServer(httpServer);
+
 app.use("/rtc", ExpressPeerServer(httpServer))
 
 app.get("/", ( req, res ) => {
