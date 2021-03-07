@@ -49,6 +49,8 @@ const peerServer = ExpressPeerServer(httpServer);
 
 app.use("/rtc", ExpressPeerServer(httpServer))
 
+app.use(express.static(path.join(path.resolve("../"), "client", "build")));
+
 app.get("/", ( req, res ) => {
     res.sendFile(path.join(path.resolve("../"), "client", "build", "index.html"));
 });
