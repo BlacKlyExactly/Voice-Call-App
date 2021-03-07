@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "startDev": "concurrently \"cd server && nodemon index.ts\" \"cd client && yarn start\"",
-    "start":  "concurrently \"cd server && yarn start\" \"cd client && yarn start\"",
-    "install": "concurrently \"cd server && yarn install\" \"cd client && yarn install\"",
+    "startDev": "concurrently \"cd server && nodemon index.ts\" \"cd client && npm run start\"",
+    "start":  "concurrently \"cd server && npm run start\" \"cd client && npm run start\"",
+    "install": "concurrently \"cd server && npm install\" \"cd client && npm install\"",
     "build": "cd client && react-scripts build",
     "test": "cd client && react-scripts test",
     "eject": "cd client && react-scripts eject"
