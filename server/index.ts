@@ -4,8 +4,8 @@ import express, { Express } from "express";
 import { PeerServer } from "peer";
 import path from "path";
 
-const httpPort: number | string = 8080 || process.env.PORT;
-const peerPort: number | string = 8081 || process.env.PORT;
+const httpPort: number | string = process.env.PORT || 8080;
+const peerPort: number | string = process.env.PORT || "8081";
 
 const app: Express = express();
 const httpServer: HttpServer = createServer(app);
@@ -16,7 +16,7 @@ const io = new SocketServer(httpServer, {
   },
 });
 
-const peerServer = PeerServer({ port: peerPort, path: "/rtc" });
+const peerServer = PeerServer({ port: parseInt(peerPort), path: "/rtc" });
 
 interface Connection {
     room: string,
