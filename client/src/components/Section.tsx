@@ -1,4 +1,4 @@
-import { FC, useState, ChangeEvent } from "react";
+import React, { FC, useState, ChangeEvent } from "react";
 import styled, { css } from "styled-components";
 import { black } from "../assets/colors";
 import { FontAwesomeIcon, FontAwesomeIconProps } from "@fortawesome/react-fontawesome";

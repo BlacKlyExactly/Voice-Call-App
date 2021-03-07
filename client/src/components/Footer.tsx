@@ -1,8 +1,8 @@
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FC } from "react";
+import React, { FC } from "react";
 import styled from "styled-components";
 import { black, blue, white } from "../assets/colors";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Wrapper = styled.footer`
     display: flex;

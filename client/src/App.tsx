@@ -1,4 +1,4 @@
-import { FC, createContext, useState, useEffect, useRef } from "react";
+import React, { FC, createContext, useState, useEffect, useRef } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { blue, white, orange, green } from "./assets/colors";
 import { faPlus, faSignInAlt } from "@fortawesome/free-solid-svg-icons";

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import styled, { css } from "styled-components";
 import { white } from "../assets/colors";
 import { avatarURL } from "../utils/constants";

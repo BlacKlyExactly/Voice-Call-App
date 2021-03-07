@@ -1,4 +1,4 @@
-import { FC, useEffect, useState, useRef } from "react";
+import React, { FC, useEffect, useState, useRef } from "react";
 import styled, { css } from "styled-components";
 import gsap from "gsap"
 import { useMediaQuery } from 'react-responsive'

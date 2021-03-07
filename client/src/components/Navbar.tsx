@@ -1,4 +1,4 @@
-import { FC, useContext, ChangeEvent } from "react";
+import React, { FC, useContext, ChangeEvent } from "react";
 import styled from "styled-components";
 import { AppContext } from "../App";
 import { black, blue, white } from "../assets/colors";

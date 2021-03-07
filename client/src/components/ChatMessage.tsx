@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect, useRef } from "react";
+import React, { FC, useContext, useEffect, useRef } from "react";
 import styled,  { css } from "styled-components";
 import { AppContext } from "../App";
 import { room, white } from "../assets/colors";

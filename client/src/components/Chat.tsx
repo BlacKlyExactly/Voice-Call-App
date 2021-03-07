@@ -1,4 +1,4 @@
-import { FC, useState, FormEvent, ChangeEvent, useContext, useRef, useEffect } from "react";
+import React, { FC, useState, FormEvent, ChangeEvent, useContext, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { room } from "../assets/colors";
 import ChatMessage from "./ChatMessage";
