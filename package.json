@@ -2,6 +2,7 @@
   "name": "voice-call-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./client",
   "scripts": {
     "startDev": "concurrently \"cd server && nodemon index.ts\" \"cd client && npm run start\"",
     "start":  "concurrently \"cd server && npm run start\" \"cd client && npm run build\"",
