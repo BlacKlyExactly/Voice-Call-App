@@ -2,7 +2,7 @@ import { Server as SocketServer, Socket } from "socket.io";
 import { createServer, Server as HttpServer, ServerOptions } from "http";
 import express, { Express } from "express";
 import { PeerServer } from "peer";
-import fs from "fs";
+import path from "path";
 
 const httpPort: number | string = 8080 || process.env.PORT;
 const peerPort: number | string = 8081 || process.env.PORT;
@@ -17,6 +17,14 @@ const io = new SocketServer(httpServer, {
 });
 
 const peerServer = PeerServer({ port: peerPort, path: "/rtc" });
+
+if(process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+  
+    app.get('*', (req, res) => {
+      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+}
 
 interface Connection {
     room: string,
