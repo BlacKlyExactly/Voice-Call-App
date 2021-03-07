@@ -1,0 +1,1 @@
+export const avatarURL: string = "https://eu.ui-avatars.com/api/?rounded=true&format=svg";
