@@ -18,14 +18,6 @@ const io = new SocketServer(httpServer, {
 
 const peerServer = PeerServer({ port: peerPort, path: "/rtc" });
 
-if(process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'));
-  
-    app.get('*', (req, res) => {
-      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-    });
-}
-
 interface Connection {
     room: string,
     peers: Name[],
@@ -55,6 +47,10 @@ let connections: Connection[] = [
 let messages: MsgList[] = [
     { roomId: "GLOBAL", messages: [] }
 ];
+
+app.get("/", ( req, res ) => {
+    res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
 app.get("/api/rooms", ( req, res ) => res.send({ connections }));
 
