@@ -1,41 +1,15 @@
-import { Server as SocketServer, Socket } from "socket.io";
-import { createServer, Server as HttpServer, ServerOptions } from "http";
+import { createServer, Server as HttpServer } from "http";
 import express, { Express } from "express";
 import { ExpressPeerServer } from "peer";
 import path from "path";
 
+const socketIO = require("socket.io");
 const httpPort: number | string = process.env.PORT || 8080;
 
 const app: Express = express();
 const httpServer: HttpServer = createServer(app);
 
-const io = new SocketServer(httpServer, {
-  cors: {
-    origin: "*",
-  },
-});
-
-interface Connection {
-    room: string,
-    peers: Name[],
-}
-
-interface Name {
-    name: string,
-    id: string,
-    color: string
-}
-
-interface MsgData { 
-    name: string, 
-    message: string,
-    roomId: string
-};
-
-interface MsgList {
-    roomId: string,
-    messages: MsgData[]
-}
+const io = socketIO(app);
 
 let connections: Connection[] = [
     { room: "GLOBAL", peers: [] }
@@ -48,7 +22,6 @@ let messages: MsgList[] = [
 const peerServer = ExpressPeerServer(httpServer);
 
 app.use("/rtc", ExpressPeerServer(httpServer))
-
 app.use(express.static(path.join(path.resolve("../"), "client", "build")));
 
 app.get("/", ( req, res ) => {
@@ -130,5 +103,26 @@ io.on("connection", ( socket: Socket ) => {
     });
 })
 
+interface Connection {
+    room: string,
+    peers: Name[],
+}
+
+interface Name {
+    name: string,
+    id: string,
+    color: string
+}
+
+interface MsgData { 
+    name: string, 
+    message: string,
+    roomId: string
+};
+
+interface MsgList {
+    roomId: string,
+    messages: MsgData[]
+}
 
 httpServer.listen(httpPort, () => console.log(`HTTP-SERVER > Listening on http://localhost:${httpPort}`));
