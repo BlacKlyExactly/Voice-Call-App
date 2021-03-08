@@ -14,7 +14,7 @@ const Wrapper = styled.footer`
     padding: 20px;
     background: ${white};
 
-    @media screen and (min-width: 1000px){
+    @media screen and (min-width: 1150px){
         position: relative;
         padding: 40px;
         margin-top: auto;
@@ -33,7 +33,7 @@ const Author = styled.span`
         cursor: pointer;
     }
 
-    @media screen and (min-width: 1000px){
+    @media screen and (min-width: 1150px){
         font-size: 25px;
     }
 `;

@@ -11,7 +11,7 @@ const Wrapper = styled.div`
         margin: 5% 20px;
     }
 
-    @media screen and (min-width: 1000px){
+    @media screen and (min-width: 1150px){
         width: 580px;
         display: grid;
         grid-template-rows: repeat(3, 0.8fr);
@@ -34,7 +34,7 @@ const Title = styled.h1<TitleProps>`
         color: ${({ color }) => color};
     }
     
-    @media screen and (min-width: 1000px){
+    @media screen and (min-width: 1150px){
         font-size: 55px;
     }
 `;
@@ -44,7 +44,7 @@ const Description = styled.p`
     line-height: 40px;
     color: ${black};
 
-    @media screen and (min-width: 1000px){
+    @media screen and (min-width: 1150px){
         font-size: 18px;
         width: 70%;
     }
@@ -74,7 +74,7 @@ const Input = styled.input<InputProps>`
     border: .2vw solid ${({ color }) => color};
     text-transform: uppercase;
 
-    @media screen and (min-width: 1000px){
+    @media screen and (min-width: 1150px){
         height: 66px;
     }
 `;
