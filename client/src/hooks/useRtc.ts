@@ -48,18 +48,17 @@ const useRtc = ( onUpdateRoom?: ( userConnection: Connection | undefined ) => vo
         connection.peers.forEach(( peerClient: Name ) => {
             if(peerClient?.id !== peer?.id) {
                 const call = peer.call(peerClient.id, stream);
-                call.on('stream', playAudio);
+                call.on('stream', () => playAudio(stream));
             }
         })
     }
 
     const playAudio = ( stream: MediaStream ) => {
         const audio: HTMLAudioElement | null = document.querySelector("audio");
+
         if(audio){
             audio.srcObject = stream;
             audio.play();
-
-            console.log(audio.played);
         }
     }
 
@@ -84,7 +83,7 @@ const useRtc = ( onUpdateRoom?: ( userConnection: Connection | undefined ) => vo
             const stream: MediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
 
             call.answer(stream);
-            call.on("stream", playAudio);
+            call.on("stream", () => playAudio(stream));
         })        
     }, [ ])
     
