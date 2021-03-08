@@ -42,8 +42,6 @@ const nameAlreadyExist = () => Swal.fire({
 });
 
 const useRtc = ( onUpdateRoom?: ( userConnection: Connection | undefined ) => void ) => {
-    const [ roomId, setRoomId ] = useState<string>("");
-
     const call = async ( connection: Connection ) => {
         const stream: MediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
 
@@ -114,7 +112,6 @@ const useRtc = ( onUpdateRoom?: ( userConnection: Connection | undefined ) => vo
             return;
         }       
 
-        setRoomId(id);
         socket.emit("joinToRoom", { id, peer: peer.id, name, color: `#${Math.floor(Math.random()*16777215).toString(16)}` });
     }
 
