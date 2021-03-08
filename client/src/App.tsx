@@ -43,32 +43,29 @@ const Global = createGlobalStyle`
 `;
 
 const Wrapper = styled.div`
+  position: relative;
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-
-  @media screen and (min-width: 1300px){
-    height: 100vh;
-  }
-`;
-
-const Sections = styled.div`
-  width: 100%;
-  margin-top: 80px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   flex-direction: column;
+  min-height: 100vh;
+`;
+
+const Sections = styled.div`
   position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
+  margin-top: 80px;
 
   @media screen and (min-width: 800px){
     margin-top: 20%;
   }
 
   @media screen and (min-width: 1300px){
-    position: absolute;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -81,17 +78,12 @@ const WelcomeMessage = styled.div`
   position: relative;
   font-size: 40px;
   font-weight: 800;
-  top: 125px;
   opacity: 0;
+  height: 0%;
+  top: 200px;
 
-  @media screen and (min-width: 1000px){
-    position: absolute;
-    top: 30%;
-  }
-
-  @media screen and (min-width: 1300px){
-    position: relative;
-    top: 28%;
+  @media screen and (min-width: 1150px){
+    top: 0;
   }
 
   span{
@@ -158,12 +150,12 @@ const App: FC = () => {
         setUserRoom: fetchUserRoom
       }}>
         <Room />
+        <Navbar />
         {name && (
           <WelcomeMessage ref={welcomeMessage}>
             Hello! <span>{name}</span> 😎
           </WelcomeMessage>
         )}
-        <Navbar />
         <Sections ref={sections}>
           <Section
             color={blue}

@@ -8,7 +8,7 @@ import CallUser from "./CallUser";
 import Chat from "./Chat";
 import { Connection, Name } from "../utils/room";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClipboard, faComment, faCommentDots, faPhoneSlash } from "@fortawesome/free-solid-svg-icons";
+import { faClipboard, faCommentDots, faPhoneSlash } from "@fortawesome/free-solid-svg-icons";
 import ReactTooltip from "react-tooltip";
 
 const Wrapper = styled.div`

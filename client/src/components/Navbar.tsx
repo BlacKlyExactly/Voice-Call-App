@@ -17,6 +17,7 @@ const Wrapper = styled.nav`
     box-shadow: 00 2px 10px rgba(0, 0, 0, 0.2);
 
     @media screen and (min-width: 1000px){
+        position: relative;
         height: 176px;
         padding: 60px;
         box-shadow: none;

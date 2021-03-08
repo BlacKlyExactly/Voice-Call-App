@@ -15,7 +15,7 @@ const Wrapper = styled.div`
         width: 580px;
         display: grid;
         grid-template-rows: repeat(3, 0.8fr);
-        grid-template-columns: 1fr;
+        margin: 7% 20px;
     }
 `;
 
