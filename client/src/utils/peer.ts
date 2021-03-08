@@ -6,7 +6,7 @@ const customGenerationFunction = () => (Math.random().toString(36) + '0000000000
 
 const peer = new Peer(customGenerationFunction(), {
     host: window.location.hostname,
-    port: port !== "" ? parseInt(port) : 80,
+    port: parseInt(window.location.port),
     path: "/rtc",
     debug: 1,
 });
