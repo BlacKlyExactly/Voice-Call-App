@@ -87,7 +87,6 @@ const PanelButtons = styled.div`
 
     button{
         font-size: 20px;
-        height: 60%;
         border-radius: 100vw;
         border: none;
         color: white;
@@ -105,26 +104,29 @@ const PanelButtons = styled.div`
 
 const LeaveButton = styled.button`
     width: 90px;
+    height: 80px;
     background: ${room.red};
+    margin: 0 10px;
 
     @media screen and (min-width: 800px){
         width: 8vw;
+        height: 4vw;
     }
 `;
 
 const SimpleButton = styled.button`
     width: 60px;
+    height: 60px;
     background: ${blue};
-    margin-left: 10px;
+    margin: 0 10px;
 
     @media screen and (min-width: 800px){
         width: 4vw;
-        margin-left: 1vw;
+        height: 4vw;
     }
 `;
 
 const Room: FC = () => {
-    const [ room, setRoom ] = useState<Connection | undefined>(undefined);
     const [ chatState, setChatState ] = useState<boolean>(false);
     
     const isDesktop = useMediaQuery({
@@ -133,7 +135,7 @@ const Room: FC = () => {
 
     const wrapper = useRef<HTMLDivElement>(null);
 
-    const { leaveFromRoom } = useVoice(( userConnection: Connection | undefined ) => setRoom(userConnection));
+    const { leaveFromRoom, room } = useVoice();
 
     useEffect(() => {
         if(room){

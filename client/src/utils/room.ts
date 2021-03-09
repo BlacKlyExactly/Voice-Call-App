@@ -32,7 +32,7 @@ export const getUserRoom = (): Promise<Connection | undefined> => {
     return new Promise(async ( resolve, reject ) => {
         const { connections } = await getConnections();
         const userConnection: Connection | undefined = 
-            connections.find(( connection: Connection ) => connection.peers.find(( peerClient: Name ) => peerClient.id === peer.id));
+            connections.find(( connection: Connection ) => connection.peers.find(( peerClient: Name ) => peerClient?.id === peer.id));
         
         if(userConnection){
             resolve(userConnection);

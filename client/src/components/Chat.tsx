@@ -87,10 +87,7 @@ const Chat: FC = () => {
 
     const chatMsgs = useRef<HTMLDivElement>(null);
 
-    const { sendMessage } = useChat(({ name, message, roomId }) => {
-        setMessages(( prev: MsgData[] ) => [ ...prev, { name, message, roomId } ]);
-        chatMsgs.current && chatMsgs.current.scrollTo(0,document.body.scrollHeight);
-    });
+    const { sendMessage, lastMessage } = useChat();
 
     useEffect(() => {
         const fetchMessages = async () => {
@@ -103,6 +100,15 @@ const Chat: FC = () => {
 
         fetchMessages();
     }, [ userRoom ])
+
+    useEffect(() => {
+        if(lastMessage){
+            const { name, message, roomId } = lastMessage;
+            setMessages(( prev: MsgData[] ) => [ ...prev, { name, message, roomId } ]);
+
+            chatMsgs.current && chatMsgs.current.scrollTo(0,document.body.scrollHeight);
+        }
+    }, [ lastMessage ])
 
     const handleSubmit = async ( e: FormEvent ) => {
         e.preventDefault();

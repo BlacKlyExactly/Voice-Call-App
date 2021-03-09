@@ -8,4 +8,11 @@ module.exports = function(app) {
       changeOrigin: true,
     })
   );
+  app.use(
+    '/rtc',
+    createProxyMiddleware({
+      target: 'http://localhost:443',
+      changeOrigin: true,
+    })
+  );
 }; 

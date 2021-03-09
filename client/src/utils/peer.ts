@@ -1,6 +1,6 @@
 import Peer from "peerjs";
 
-const port: number | string = process.env.NODE_ENV === 'production' ? window.location.port : 8080;
+const port: number | string = process.env.NODE_ENV === 'production' ? window.location.port : 443;
 
 const customGenerationFunction = () => (Math.random().toString(36) + '0000000000000000000').substr(2, 16);
 

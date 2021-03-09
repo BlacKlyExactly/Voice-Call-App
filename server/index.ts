@@ -1,13 +1,16 @@
 import { Server as SocketServer, Socket } from "socket.io";
-import { createServer, Server as HttpServer, ServerOptions } from "http";
+import { createServer, Server as HttpServer} from "http";
 import express, { Express } from "express";
-import { ExpressPeerServer } from "peer";
+import { PeerServer } from "peer";
 import path from "path";
 
 const httpPort: number | string = process.env.PORT || 8080;
+const peerPort: number = 443;
 
 const app: Express = express();
+
 const httpServer: HttpServer = createServer(app);
+const peerServer = PeerServer({ port: 443, path: "/rtc" })
 
 const io = new SocketServer(httpServer, {
   cors: {
@@ -23,9 +26,6 @@ let messages: MsgList[] = [
     { roomId: "GLOBAL", messages: [] }
 ];
 
-const peerServer = ExpressPeerServer(httpServer);
-
-app.use("/rtc", ExpressPeerServer(httpServer))
 
 app.use(express.static(path.join(path.resolve("../"), "client", "build")));
 
@@ -99,13 +99,13 @@ io.on("connection", ( socket: Socket ) => {
         io.to(roomId).emit("messageSent", { name, message, roomId });
     })
     
-    peerServer.on('disconnect', ( client ) => {
+    peerServer.on("disconnect", ( client ) => {
         const peer = client.getId();
         const userConnection: Connection | undefined = 
             connections.find(( conn: Connection ) => conn.peers.find(( peerClient: Name ) => peerClient.id === peer));
         
         userConnection && leaveFromRoom({ id: userConnection?.room, peer });
-    });
+    })
 })
 
 interface Connection {

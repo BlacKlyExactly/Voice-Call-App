@@ -47,7 +47,7 @@ const Wrapper = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  flex-wrap: wrap;
   flex-direction: column;
   min-height: 100vh;
 `;
@@ -71,23 +71,6 @@ const Sections = styled.div`
     align-items: center;
     width: 90%;
     margin: 0;
-  }
-`;
-
-const WelcomeMessage = styled.div`
-  position: relative;
-  font-size: 40px;
-  font-weight: 800;
-  opacity: 0;
-  height: 0%;
-  top: 200px;
-
-  @media screen and (min-width: 1150px){
-    top: 0;
-  }
-
-  span{
-    color: ${blue};
   }
 `;
 
@@ -117,18 +100,6 @@ const App: FC = () => {
   }
 
   const sections = useRef<HTMLDivElement>(null);
-  const welcomeMessage = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const value: number = name ? 80 : 0;
-    
-    welcomeMessage.current && gsap.to(welcomeMessage.current, { opacity: 1, duration: 0.3, ease: "expo.inOut" });
-    gsap.to(sections.current, {
-        y: value,
-        duration: 0.3,
-        ease: "expo.inOut",
-    });
-  }, [ name ])
 
   const setName = ( newName: string ) => setUsername(newName);
 
@@ -141,8 +112,7 @@ const App: FC = () => {
           rel="stylesheet"
         />
       </Helmet>
-      <Global/>
-      <audio />
+      <Global/> 
       <AppContext.Provider value={{
         name,
         setName,
@@ -151,11 +121,6 @@ const App: FC = () => {
       }}>
         <Room />
         <Navbar />
-        {name && (
-          <WelcomeMessage ref={welcomeMessage}>
-            Hello! <span>{name}</span> 😎
-          </WelcomeMessage>
-        )}
         <Sections ref={sections}>
           <Section
             color={blue}

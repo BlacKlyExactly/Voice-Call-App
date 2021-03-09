@@ -30,6 +30,9 @@ const Wrapper = styled.nav`
 
 const Selects = styled.div`
     margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 const Brand = styled.span`

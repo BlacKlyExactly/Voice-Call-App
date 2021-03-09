@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import peer from "../utils/peer";
 import socket from "../utils/socket";
 import Swal from "sweetalert2";
@@ -41,52 +41,55 @@ const nameAlreadyExist = () => Swal.fire({
     icon: "error"
 });
 
-const useRtc = ( onUpdateRoom?: ( userConnection: Connection | undefined ) => void ) => {
+const useRtc = () => {
+    const [ localStream, setLocalStream ] = useState<MediaStream>();
+    const [ room, setRoom ] = useState<Connection>();
+
+    useEffect(() => {
+        socket.on("onJoinToRoom", async ( connection: Connection ) => {
+            call(connection);
+            const userConnection: Connection | undefined = await getUserRoom();
+            setRoom(userConnection);
+        })
+
+        socket.on("leftFromRoom", async ({ id, peer }: { id: string, peer: Name }) => {
+            const userConnection: Connection | undefined = await getUserRoom();
+            setRoom(userConnection);
+        })
+    }, [ ])
+
+    useEffect(() => {
+        if(localStream){
+            peer.on("call", async ( call: Peer.MediaConnection ) => {
+                call.answer(localStream);
+                call.on("stream", playAudio);
+
+                call.on("error", () => console.error("peer error"));
+            })
+        }
+    }, [ localStream ])
+    
     const call = async ( connection: Connection ) => {
         const stream: MediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        setLocalStream(stream);
 
         connection.peers.forEach(( peerClient: Name ) => {
-            if(peerClient?.id !== peer?.id) {
-                const call = peer.call(peerClient.id, stream);
-                call.on('stream', () => playAudio(stream));
+            if(peerClient?.id !== peer.id){
+                const call = peer.call(peerClient?.id, stream);
+                call?.on('stream', playAudio);
+
+                call.on("close", () => console.log(`${peerClient?.id} closed call`))
+                call.on("error", () => console.error("peer error"));
             }
         })
     }
 
     const playAudio = ( stream: MediaStream ) => {
-        const audio: HTMLAudioElement | null = document.querySelector("audio");
+        const audioctx: AudioContext = new AudioContext();
+        const src: MediaStreamAudioSourceNode = audioctx.createMediaStreamSource(stream);
 
-        if(audio){
-            audio.srcObject = stream;
-            audio.play();
-        }
+        src.connect(audioctx.destination);
     }
-
-    useEffect(() => {
-        socket.on("onJoinToRoom", async ( connection: Connection ) => {
-            call(connection);
-
-            if(onUpdateRoom){
-                const userConnection: Connection | undefined = await getUserRoom();
-                onUpdateRoom(userConnection);
-            }
-        })
-
-        socket.on("leftFromRoom", async ({ id, peer }: { id: string, peer: Name }) => {
-            if(onUpdateRoom){
-                const userConnection: Connection | undefined = await getUserRoom();
-                onUpdateRoom(userConnection);
-            }
-        })
-
-        peer.on("call", async ( call: Peer.MediaConnection ) => {
-            const stream: MediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-
-            call.answer(stream);
-            call.on("stream", () => playAudio(stream));
-        })        
-    }, [ ])
-    
 
     const connectToRoom = async ( id: string, name: string | undefined ) => {
         if(!name){
@@ -154,7 +157,7 @@ const useRtc = ( onUpdateRoom?: ( userConnection: Connection | undefined ) => vo
         })
     }
 
-    return { connectToRoom, leaveFromRoom, createRoom }
+    return { connectToRoom, leaveFromRoom, createRoom, room }
 }
 
 export default useRtc;

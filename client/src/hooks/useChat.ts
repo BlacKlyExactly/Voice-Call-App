@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import socket from "../utils/socket";
 import { Connection, getUserRoom } from "../utils/room";
 
@@ -13,9 +13,11 @@ export interface MsgList {
     messages: MsgData[]
 }
 
-const useChat = ( onMessageSent: ( data: MsgData ) => void ) => {
+const useChat = () => {
+    const [ lastMessage, setLastMessage ] = useState<MsgData>();
+
     useEffect(() => {
-        socket.on("messageSent", ({ name, message, roomId }: MsgData ) => onMessageSent({ name, message, roomId }));
+        socket.on("messageSent", ({ name, message, roomId }: MsgData ) => setLastMessage({ name, message, roomId }));
     }, [ ])
 
     const sendMessage = async ({ name, message }: MsgData ) => {
@@ -24,7 +26,7 @@ const useChat = ( onMessageSent: ( data: MsgData ) => void ) => {
             socket.emit("sendMessage", { name, message, roomId: userRoom.room });
     }
 
-    return { sendMessage };
+    return { sendMessage, lastMessage };
 }
 
 export default useChat;
