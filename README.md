@@ -19,7 +19,6 @@ Voice call application which using codes for creating rooms or join to them. App
 
 ## App presentation
 !["img1"](https://i.imgur.com/PGnDpBT.png)
-!["img1"](https://i.imgur.com/bphkC1Y.png)
 !["img1"](https://i.imgur.com/BZaHGkg.png)
 !["img1"](https://i.imgur.com/3t79ZB4.png)
 !["img1"](https://i.imgur.com/OMLjwWH.png)

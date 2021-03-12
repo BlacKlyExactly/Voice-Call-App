@@ -1,9 +1,8 @@
 import React, { FC, createContext, useState, useEffect, useRef } from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import { blue, white, orange, green } from "./assets/colors";
 import { faPlus, faSignInAlt } from "@fortawesome/free-solid-svg-icons";
 import { Helmet } from "react-helmet";
-import gsap from "gsap";
+import { blue, white, orange, green } from "./assets/colors";
 import useVoice from "./hooks/useRtc";
 import Section from "./components/Section";
 import Navbar from "./components/Navbar";
@@ -12,7 +11,6 @@ import Room from "./components/Room";
 import { Connection, getUserRoom } from "./utils/room";
 
 const Global = createGlobalStyle`
-
   *,
   *::before,
   *::after {

@@ -121,7 +121,6 @@ const Button = styled.button<InputProps>`
     `}
 `;
 
-
 const Section: FC<SectionProps> = ({ 
     color, 
     firstTitlePart, 

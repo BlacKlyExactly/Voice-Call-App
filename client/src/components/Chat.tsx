@@ -21,7 +21,7 @@ const ChatArea = styled.div`
     height: 85%;
     padding: 20px;
 
-    @media screen and (min-width: 800px){
+    @media screen and (min-width: 1150px){
        position: relative;
        width: 25%;
        height: 100%;
@@ -44,7 +44,7 @@ const ChatInput = styled.input`
     padding: 10px;
     border-radius: 10px;
 
-    @media screen and (min-width: 800px){
+    @media screen and (min-width: 1150px){
         height: 40%;
         width: 70%;
         padding: 1vw;
@@ -66,7 +66,7 @@ const ChatSubmit = styled.button`
     display: flex;
     align-items: center;
 
-    @media screen and (min-width: 800px){
+    @media screen and (min-width: 1150px){
         height: 40%;
         width: 20%;
     }

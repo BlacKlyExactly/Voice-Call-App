@@ -6,7 +6,7 @@ import useVoice from "../hooks/useRtc";
 import { blue, room } from "../assets/colors";
 import CallUser from "./CallUser";
 import Chat from "./Chat";
-import { Connection, Name } from "../utils/room";
+import { Name } from "../utils/room";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClipboard, faCommentDots, faPhoneSlash } from "@fortawesome/free-solid-svg-icons";
 import ReactTooltip from "react-tooltip";
@@ -45,7 +45,7 @@ const CallWindow = styled.div<CallWindowProps>`
     grid-template-rows: 1fr;
     
 
-    @media screen and (min-width: 800px){
+    @media screen and (min-width: 1150px){
         height: 88%;
         max-width: 100%;
 
@@ -92,7 +92,7 @@ const PanelButtons = styled.div`
         color: white;
     }
 
-    @media screen and (min-width: 800px){
+    @media screen and (min-width: 1150px){
         max-width: 100%;
         height: 12%;
 
@@ -108,7 +108,7 @@ const LeaveButton = styled.button`
     background: ${room.red};
     margin: 0 10px;
 
-    @media screen and (min-width: 800px){
+    @media screen and (min-width: 1150px){
         width: 8vw;
         height: 4vw;
     }
@@ -120,7 +120,7 @@ const SimpleButton = styled.button`
     background: ${blue};
     margin: 0 10px;
 
-    @media screen and (min-width: 800px){
+    @media screen and (min-width: 1150px){
         width: 4vw;
         height: 4vw;
     }
